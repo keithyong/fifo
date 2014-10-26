@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define QUEUE_ELEMENTS 	100
 #define QUEUE_SIZE 	(QUEUE_ELEMENTS + 1)
@@ -64,12 +65,12 @@ int main(){
     char * line;
     char * args[10];
      
-    printf("> ");
-    fgets(line, 1024, stdin);
-    while (strcmp(line , "exit\n") != 0){
+    while (1)
+    {
         printf("> ");
         fgets(line, 1024, stdin);
         int argc = parse(line, args, DELIMS);
+
         if (argc > 1)
         {   
             if (strcmp(args[0], "enqueue") == 0)
@@ -77,6 +78,20 @@ int main(){
                 enqueue(args[1][0]);
                 printQueue();
             }
+            else if (strcmp(args[0], "dequeue") == 0)
+            {
+                char temp = dequeue(&args[1][0]);
+                printQueue();
+            }
+        }
+
+        if (strcmp(args[0], "print") == 0)
+        {
+            printQueue();
+        }
+        else if (strcmp(args[0], "exit") == 0)
+        {
+            exit(1);
         }
     }
 }
