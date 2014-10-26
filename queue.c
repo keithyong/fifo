@@ -10,7 +10,23 @@ char Queue[QUEUE_SIZE];
 int queueIn, queueOut;
 int parse(char *inputLine, char *arguments[], const char *delimters);
 void printQueue(void);
+void printIntro(void);
 
+
+void printIntro(void)
+{
+    printf("\n\n");
+    printf("+-----------------------+\n");
+    printf("| WELCOME TO FIFO QUEUE |\n");
+    printf("| By Keith Yong         |\n");
+    printf("|                       |\n");
+    printf("| - Commands -          |\n");
+    printf("| 1. enqueue [char]     |\n");
+    printf("| 2. dequeue [char]     |\n");
+    printf("| 3. print              |\n");
+    printf("| 4. exit               |\n");
+    printf("+-----------------------+\n\n\n");
+}
 void printQueue(void)
 {
     int i;
@@ -62,6 +78,7 @@ int parse(char *inputLine, char *arguments[], const char *delimiters)
 }
 
 int main(){
+    printIntro();
     char * line;
     char * args[10];
      
