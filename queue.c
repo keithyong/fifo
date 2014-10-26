@@ -21,8 +21,8 @@ void printIntro(void)
     printf("| By Keith Yong         |\n");
     printf("|                       |\n");
     printf("| - Commands -          |\n");
-    printf("| 1. enqueue [char]     |\n");
-    printf("| 2. dequeue [char]     |\n");
+    printf("| 1. en [char]          |\n");
+    printf("| 2. de                 |\n");
     printf("| 3. print              |\n");
     printf("| 4. exit               |\n");
     printf("+-----------------------+\n\n\n");
@@ -94,7 +94,7 @@ int main(){
 
         if (argc > 1)
         {   
-            if (strcmp(args[0], "enqueue") == 0)
+            if (strcmp(args[0], "en") == 0)
             {   
                 char temp = args[1][0];
                 enqueue(temp);
@@ -105,7 +105,7 @@ int main(){
             if (strcmp(args[0], "print") == 0)
             {
                 printQueue();
-            } else if (strcmp(args[0], "dequeue") == 0) {
+            } else if (strcmp(args[0], "de") == 0) {
                 char temp;
                 int a = dequeue(&temp);
                 
