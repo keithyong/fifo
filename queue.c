@@ -30,8 +30,11 @@ void printIntro(void)
 void printQueue(void)
 {
     int i;
-    for(i = 0; i < QUEUE_SIZE; i++)
-        printf("[%c]", Queue[i]);
+    for(i = queueOut; i <= queueIn; i++)
+    {
+        if(Queue[i] != '\0')
+            printf("[%c]", Queue[i]);
+    }
     putchar('\n');
 }
 
@@ -79,6 +82,7 @@ int parse(char *inputLine, char *arguments[], const char *delimiters)
 
 int main(){
     printIntro();
+    queueInit();
     char * line;
     char * args[10];
      
@@ -92,23 +96,31 @@ int main(){
         {   
             if (strcmp(args[0], "enqueue") == 0)
             {   
-                enqueue(args[1][0]);
+                char temp = args[1][0];
+                enqueue(temp);
+                printf("Enqueued %c to the queue\n", temp);
                 printQueue();
             }
-            else if (strcmp(args[0], "dequeue") == 0)
+        } else if (argc == 1) {
+            if (strcmp(args[0], "print") == 0)
             {
-                char temp = dequeue(&args[1][0]);
+                printQueue();
+            } else if (strcmp(args[0], "dequeue") == 0) {
+                char temp;
+                int a = dequeue(&temp);
+                
+                if (a == -1)
+                    printf("Nothing to dequeue");
+                else
+                    printf("Dequeued %c from the queue\n", temp);
+
                 printQueue();
             }
-        }
-
-        if (strcmp(args[0], "print") == 0)
-        {
-            printQueue();
-        }
-        else if (strcmp(args[0], "exit") == 0)
-        {
-            exit(1);
-        }
+            else if (strcmp(args[0], "exit") == 0) {
+                exit(1);
+            } else {
+                printf("Command not found\n");
+            }
+        } 
     }
 }
